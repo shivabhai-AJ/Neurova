@@ -215,6 +215,7 @@ window.submitOrder = function(product) {
         return;
     }
 
+    
     const ordersRef = ref(database, "orders");
     const newOrderRef = push(ordersRef);
 
