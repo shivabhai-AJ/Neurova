@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NEUROVA Admin - Orders</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: lightgray;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .order {
+            background: white;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .order h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>NEUROVA - Customer Orders</h1>
+
+<div id="orders">
+    Loading orders...
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    onValue
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB8ujW3S_3l8DAHfT5rOZaFz5QlI7k0AtM",
+    authDomain: "neurova-2a935.firebaseapp.com",
+    databaseURL: "https://neurova-2a935-default-rtdb.firebaseio.com",
+    projectId: "neurova-2a935",
+    storageBucket: "neurova-2a935.firebasestorage.app",
+    messagingSenderId: "8072233485",
+    appId: "1:8072233485:web:9c6427def8d7abf2ff8b44"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const database = getDatabase(app);
+
+
+const ordersRef = ref(database, "orders");
+
+
+onValue(ordersRef, (snapshot) => {
+
+    const ordersDiv = document.getElementById("orders");
+
+    ordersDiv.innerHTML = "";
+
+
+    if (!snapshot.exists()) {
+
+        ordersDiv.innerHTML = "<h2>No orders yet.</h2>";
+
+        return;
+    }
+
+
+    snapshot.forEach((childSnapshot) => {
+
+        const order = childSnapshot.val();
+
+
+        ordersDiv.innerHTML += `
+
+            <div class="order">
+
+                <h3>${order.product}</h3>
+
+                <p><b>Name:</b> ${order.name}</p>
+
+                <p><b>Phone:</b> ${order.phone}</p>
+
+                <p><b>Address:</b> ${order.address}</p>
+
+            </div>
+
+        `;
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
