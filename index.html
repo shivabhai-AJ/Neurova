@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,43 +7,7 @@
     <style>
         body {
             font-family: Arial;
-            background-color: lightgray; 
-        }
- 
-        .product-card {
-            background-color: white;
-            padding: 20px;
-            width: 300px;
-            border-radius: 10px;
-            margin: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-            transition: 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-card button {
-            background-color: black;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .products {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .product-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 8px;
+            background-color: lightgray;
         }
 
         .navbar {
@@ -56,39 +21,6 @@
             text-decoration: none;
             margin: 0 15px;
             font-size: 16px;
-        }
-
-        .order-form {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #f7f7f7;
-            border-radius: 10px;
-        }
-
-        .order-form input,
-        .order-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-
-        .order-form textarea {
-            height: 80px;
-            resize: none;
-        }
-
-        .order-success {
-            display: none;
-            text-align: center;
-            background-color: white;
-            padding: 15px;
-            margin: 20px auto;
-            border-radius: 8px;
-            width: 300px;
         }
 
         .logo {
@@ -110,6 +42,86 @@
             margin: 30px 0 10px;
             font-size: 28px;
         }
+
+        .products {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        button {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .order-form {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 10px;
+        }
+
+        .order-form input,
+        .order-form textarea,
+        #orderIdInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .order-form textarea {
+            height: 80px;
+            resize: none;
+        }
+
+        .order-success,
+        .status-box {
+            display: none;
+            text-align: center;
+            background-color: white;
+            padding: 15px;
+            margin: 20px auto;
+            border-radius: 8px;
+            width: 300px;
+        }
+
+        .status-check {
+            background: white;
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -118,17 +130,19 @@
 <div class="navbar">
     <a href="#">Home</a>
     <a href="#">Shop</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+    <a href="#status">Track Order</a>
 </div>
 
 <h1 class="logo">NEUROVA</h1>
-<p class="tagline">Discover something you’ll love.</p>
+
+<p class="tagline">Discover something you'll love.</p>
+
 <h2 class="section-title">Our Products</h2>
 
 <div class="products">
 
     <div class="product-card">
+
         <h3>BMW Toy Car</h3>
 
         <img class="product-image" src="car.jfif">
@@ -138,17 +152,27 @@
         <button onclick="showOrderForm()">Buy Now</button>
 
         <div class="order-form" id="orderForm">
+
             <h3>Place Your Order</h3>
 
             <input type="text" id="bmwName" placeholder="Your Name">
-            <input type="tel" id="bmwPhone" placeholder="Phone Number">
-            <textarea id="bmwAddress" placeholder="Delivery Address"></textarea>
 
-            <button onclick="submitOrder('BMW Toy Car')">Submit Order</button>
+            <input type="tel" id="bmwPhone" placeholder="Phone Number">
+
+            <textarea id="bmwAddress"
+            placeholder="Delivery Address"></textarea>
+
+            <button onclick="submitOrder('BMW Toy Car')">
+                Submit Order
+            </button>
+
         </div>
+
     </div>
 
+
     <div class="product-card">
+
         <h3>Smart Watch</h3>
 
         <img class="product-image" src="watch.jfif">
@@ -158,23 +182,64 @@
         <button onclick="showWatchForm()">Buy Now</button>
 
         <div class="order-form" id="watchOrderForm">
+
             <h3>Place Your Order</h3>
 
             <input type="text" id="watchName" placeholder="Your Name">
-            <input type="tel" id="watchPhone" placeholder="Phone Number">
-            <textarea id="watchAddress" placeholder="Delivery Address"></textarea>
 
-            <button onclick="submitOrder('Smart Watch')">Submit Order</button>
+            <input type="tel" id="watchPhone" placeholder="Phone Number">
+
+            <textarea id="watchAddress"
+            placeholder="Delivery Address"></textarea>
+
+            <button onclick="submitOrder('Smart Watch')">
+                Submit Order
+            </button>
+
         </div>
+
     </div>
 
 </div>
 
+
 <div class="order-success" id="successMessage"></div>
 
+
+<!-- ORDER STATUS CHECK -->
+
+<div class="status-check" id="status">
+
+    <h2>Track Your Order</h2>
+
+    <input
+        type="text"
+        id="orderIdInput"
+        placeholder="Enter your Order ID">
+
+    <button onclick="checkOrderStatus()">
+        Check Status
+    </button>
+
+    <div class="status-box" id="statusResult"></div>
+
+</div>
+
+
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    push,
+    set,
+    get
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyB8ujW3S_3l8DAHfT5rOZaFz5QlI7k0AtM",
@@ -186,60 +251,170 @@ const firebaseConfig = {
     appId: "1:8072233485:web:9c6427def8d7abf2ff8b44"
 };
 
+
 const app = initializeApp(firebaseConfig);
+
 const database = getDatabase(app);
+
+
+/* SHOW ORDER FORMS */
 
 window.showOrderForm = function() {
     document.getElementById("orderForm").style.display = "block";
 };
 
+
 window.showWatchForm = function() {
     document.getElementById("watchOrderForm").style.display = "block";
 };
 
+
+/* SUBMIT ORDER */
+
 window.submitOrder = function(product) {
-    let name, phone, address;
+
+    let name;
+    let phone;
+    let address;
+
 
     if (product === "BMW Toy Car") {
+
         name = document.getElementById("bmwName").value;
         phone = document.getElementById("bmwPhone").value;
         address = document.getElementById("bmwAddress").value;
+
     } else {
+
         name = document.getElementById("watchName").value;
         phone = document.getElementById("watchPhone").value;
         address = document.getElementById("watchAddress").value;
+
     }
+
 
     if (!name || !phone || !address) {
+
         alert("Please fill all details!");
+
         return;
+
     }
 
-    
+
     const ordersRef = ref(database, "orders");
+
     const newOrderRef = push(ordersRef);
 
+
     set(newOrderRef, {
+
         product: product,
         name: name,
         phone: phone,
-        address: address
+        address: address,
+        status: "Pending"
+
     })
     .then(() => {
+
+        const orderId = newOrderRef.key;
+
         document.getElementById("successMessage").innerHTML =
+
             "🎉 <b>Order Submitted Successfully!</b><br><br>" +
+
             "Product: " + product + "<br>" +
-"Name: " + name + "<br>" +
-"Phone: " + phone + "<br>" +
-"Address: " + address;
+
+            "Name: " + name + "<br>" +
+
+            "<br><b>Your Order ID:</b><br>" +
+
+            orderId +
+
+            "<br><br>Please save this Order ID to track your order.";
 
         document.getElementById("successMessage").style.display = "block";
+
     })
     .catch((error) => {
+
         alert("Error: " + error.message);
+
     });
+
 };
+
+
+/* CHECK ORDER STATUS */
+
+window.checkOrderStatus = function() {
+
+    const orderId =
+        document.getElementById("orderIdInput").value.trim();
+
+
+    if (!orderId) {
+
+        alert("Please enter your Order ID!");
+
+        return;
+
+    }
+
+
+    const orderRef =
+        ref(database, "orders/" + orderId);
+
+
+    get(orderRef)
+
+    .then((snapshot) => {
+
+        const result =
+            document.getElementById("statusResult");
+
+
+        if (snapshot.exists()) {
+
+            const order = snapshot.val();
+
+            result.innerHTML =
+
+                "<h3>Order Found!</h3>" +
+
+                "<p><b>Product:</b> " +
+                order.product + "</p>" +
+
+                "<p><b>Status:</b> " +
+                (order.status || "Pending") +
+                "</p>";
+
+        } else {
+
+            result.innerHTML =
+
+                "<h3>Order not found!</h3>" +
+
+                "<p>Please check your Order ID.</p>";
+
+        }
+
+
+        result.style.display = "block";
+
+    })
+
+    .catch((error) => {
+
+        alert("Error: " + error.message);
+
+    });
+
+};
+
 </script>
 
 </body>
 </html>
+```
