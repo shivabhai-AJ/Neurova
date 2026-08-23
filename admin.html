@@ -1,9 +1,8 @@
-
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-    <title>NEUROVA Admin - Orders</title>
+    <title>NEUROVA Admin</title>
 
     <style>
         body {
@@ -15,6 +14,40 @@
 
         h1 {
             text-align: center;
+        }
+
+        /* LOGIN BOX */
+        #loginBox {
+            background: white;
+            max-width: 350px;
+            margin: 100px auto;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        #loginBox input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            background: black;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* ADMIN PANEL */
+        #adminPanel {
+            display: none;
         }
 
         .order {
@@ -45,17 +78,85 @@
             cursor: pointer;
             margin-left: 10px;
         }
+
+        .logout-btn {
+            display: block;
+            margin: 20px auto;
+        }
+
+        #loginError {
+            color: red;
+        }
     </style>
 </head>
 
 <body>
 
-<h1>NEUROVA - Customer Orders</h1>
+<!-- LOGIN PAGE -->
+<div id="loginBox">
+    <h2>NEUROVA Admin Login</h2>
 
-<div id="orders">
-    Loading orders...
+    <input type="password" id="password" placeholder="Enter Password">
+
+    <button onclick="login()">Login</button>
+
+    <p id="loginError"></p>
 </div>
 
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel">
+
+    <h1>NEUROVA - Customer Orders</h1>
+
+    <button class="logout-btn" onclick="logout()">Logout</button>
+
+    <div id="orders">
+        Loading orders...
+    </div>
+
+</div>
+
+
+<!-- NORMAL JAVASCRIPT -->
+<script>
+
+const adminPassword = "neurova123";
+
+function login() {
+
+    const enteredPassword =
+        document.getElementById("password").value;
+
+    if (enteredPassword === adminPassword) {
+
+        document.getElementById("loginBox").style.display = "none";
+
+        document.getElementById("adminPanel").style.display = "block";
+
+    } else {
+
+        document.getElementById("loginError").innerText =
+            "Wrong password!";
+
+    }
+
+}
+
+function logout() {
+
+    document.getElementById("adminPanel").style.display = "none";
+
+    document.getElementById("loginBox").style.display = "block";
+
+    document.getElementById("password").value = "";
+
+}
+
+</script>
+
+
+<!-- FIREBASE -->
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
@@ -92,7 +193,6 @@ onValue(ordersRef, (snapshot) => {
 
     ordersDiv.innerHTML = "";
 
-
     if (!snapshot.exists()) {
 
         ordersDiv.innerHTML = "<h2>No orders yet.</h2>";
@@ -100,14 +200,11 @@ onValue(ordersRef, (snapshot) => {
         return;
     }
 
-
     snapshot.forEach((childSnapshot) => {
 
         const order = childSnapshot.val();
         const orderId = childSnapshot.key;
-
         const status = order.status || "Pending";
-
 
         ordersDiv.innerHTML += `
 
@@ -125,11 +222,20 @@ onValue(ordersRef, (snapshot) => {
 
                 <select onchange="changeStatus('${orderId}', this.value)">
 
-                    <option value="Pending" ${status === "Pending" ? "selected" : ""}>Pending</option>
+                    <option value="Pending"
+                    ${status === "Pending" ? "selected" : ""}>
+                    Pending
+                    </option>
 
-                    <option value="Confirmed" ${status === "Confirmed" ? "selected" : ""}>Confirmed</option>
+                    <option value="Confirmed"
+                    ${status === "Confirmed" ? "selected" : ""}>
+                    Confirmed
+                    </option>
 
-                    <option value="Delivered" ${status === "Delivered" ? "selected" : ""}>Delivered</option>
+                    <option value="Delivered"
+                    ${status === "Delivered" ? "selected" : ""}>
+                    Delivered
+                    </option>
 
                 </select>
 
