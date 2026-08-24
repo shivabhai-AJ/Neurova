@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Track Your Order - NEUROVA</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: lightgray;
+            margin: 0;
+        }
+
+        .navbar {
+            background-color: black;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .track-box {
+            background: white;
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            background: black;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .order {
+            background: white;
+            max-width: 500px;
+            margin: 15px auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="track.html">Track Order</a>
+</div>
+
+<h1>Track Your Order</h1>
+
+<div class="track-box">
+
+    <input
+        type="tel"
+        id="phone"
+        placeholder="Enter your phone number">
+
+    <br>
+
+    <button onclick="trackOrder()">Track Order</button>
+
+</div>
+
+<div id="results"></div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    query,
+    orderByChild,
+    equalTo,
+    get
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB8ujW3S_3l8DAHfT5rOZaFz5QlI7k0AtM",
+    authDomain: "neurova-2a935.firebaseapp.com",
+    databaseURL: "https://neurova-2a935-default-rtdb.firebaseio.com",
+    projectId: "neurova-2a935",
+    storageBucket: "neurova-2a935.firebasestorage.app",
+    messagingSenderId: "8072233485",
+    appId: "1:8072233485:web:9c6427def8d7abf2ff8b44"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const database = getDatabase(app);
+
+
+window.trackOrder = function() {
+
+    const phone = document.getElementById("phone").value.trim();
+
+    const results = document.getElementById("results");
+
+    if (!phone) {
+        alert("Please enter your phone number!");
+        return;
+    }
+
+
+    const ordersRef = ref(database, "orders");
+
+    const phoneQuery = query(
+        ordersRef,
+        orderByChild("phone"),
+        equalTo(phone)
+    );
+
+
+    get(phoneQuery)
+    .then((snapshot) => {
+
+        results.innerHTML = "";
+
+
+        if (!snapshot.exists()) {
+
+            results.innerHTML =
+                "<div class='order'><h3>No order found!</h3></div>";
+
+            return;
+        }
+
+
+        snapshot.forEach((childSnapshot) => {
+
+            const order = childSnapshot.val();
+
+            const status = order.status || "Pending";
+
+
+            results.innerHTML += `
+
+                <div class="order">
+
+                    <h3>${order.product}</h3>
+
+                    <p><b>Name:</b> ${order.name}</p>
+
+                    <p><b>Phone:</b> ${order.phone}</p>
+
+                    <p><b>Address:</b> ${order.address}</p>
+
+                    <p><b>Order Status:</b> ${status}</p>
+
+                </div>
+
+            `;
+
+        });
+
+    })
+    .catch((error) => {
+
+        alert("Error: " + error.message);
+
+    });
+
+};
+
+</script>
+
+</body>
+</html>
