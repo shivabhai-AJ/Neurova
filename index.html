@@ -403,19 +403,22 @@ window.checkOrderStatus = function() {
 
                 const status = order.status || "Pending";
 
-const statusClass =
-    status === "Pending" ? "status-pending" :
-    status === "Confirmed" ? "status-confirmed" :
-    "status-delivered";
+let statusColor;
+
+if (status === "Pending") {
+    statusColor = "orange";
+} else if (status === "Confirmed") {
+    statusColor = "blue";
+} else {
+    statusColor = "green";
+}
 
 result.innerHTML =
     "<h3>Order Found!</h3>" +
-
-    "<p><b>Product:</b> " +
-    order.product + "</p>" +
-
-    "<p><b>Status:</b> " +
-    "<span class='" + statusClass + "'>" +
+    "<p><b>Product:</b> " + order.product + "</p>" +
+    "<p><b>Status:</b> <span style='color:" +
+    statusColor +
+    "; font-weight:bold;'>" +
     status +
     "</span></p>";
 
