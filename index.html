@@ -401,9 +401,23 @@ window.checkOrderStatus = function() {
                 "<p><b>Product:</b> " +
                 order.product + "</p>" +
 
-                "<p><b>Status:</b> " +
-                (order.status || "Pending") +
-                "</p>";
+                const status = order.status || "Pending";
+
+const statusClass =
+    status === "Pending" ? "status-pending" :
+    status === "Confirmed" ? "status-confirmed" :
+    "status-delivered";
+
+result.innerHTML =
+    "<h3>Order Found!</h3>" +
+
+    "<p><b>Product:</b> " +
+    order.product + "</p>" +
+
+    "<p><b>Status:</b> " +
+    "<span class='" + statusClass + "'>" +
+    status +
+    "</span></p>";
 
         } else {
 
