@@ -1,4 +1,4 @@
-```html 
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,7 @@
             font-family: Arial;
             background-color: lightgray;
         }
-  
+
         .navbar {
             background-color: black;
             padding: 15px;
@@ -47,6 +47,7 @@
             display: flex;
             justify-content: center;
             gap: 20px;
+            flex-wrap: wrap;
         }
 
         .product-card {
@@ -121,22 +122,22 @@
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-        } 
+        }
 
-             .status-pending {
-    color: orange;
-    font-weight: bold;
-}
+        .status-pending {
+            color: orange;
+            font-weight: bold;
+        }
 
-.status-confirmed {
-    color: blue;
-    font-weight: bold;
-}
+        .status-confirmed {
+            color: blue;
+            font-weight: bold;
+        }
 
-.status-delivered {
-    color: green;
-    font-weight: bold;
-}
+        .status-delivered {
+            color: green;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -157,7 +158,6 @@
 <div class="products">
 
     <div class="product-card">
-
         <h3>BMW Toy Car</h3>
 
         <img class="product-image" src="car.jfif">
@@ -167,7 +167,6 @@
         <button onclick="showOrderForm()">Buy Now</button>
 
         <div class="order-form" id="orderForm">
-
             <h3>Place Your Order</h3>
 
             <input type="text" id="bmwName" placeholder="Your Name">
@@ -175,19 +174,15 @@
             <input type="tel" id="bmwPhone" placeholder="Phone Number">
 
             <textarea id="bmwAddress"
-            placeholder="Delivery Address"></textarea>
+                placeholder="Delivery Address"></textarea>
 
             <button onclick="submitOrder('BMW Toy Car')">
                 Submit Order
             </button>
-
         </div>
-
     </div>
 
-
     <div class="product-card">
-
         <h3>Smart Watch</h3>
 
         <img class="product-image" src="watch.jfif">
@@ -197,7 +192,6 @@
         <button onclick="showWatchForm()">Buy Now</button>
 
         <div class="order-form" id="watchOrderForm">
-
             <h3>Place Your Order</h3>
 
             <input type="text" id="watchName" placeholder="Your Name">
@@ -205,23 +199,17 @@
             <input type="tel" id="watchPhone" placeholder="Phone Number">
 
             <textarea id="watchAddress"
-            placeholder="Delivery Address"></textarea>
+                placeholder="Delivery Address"></textarea>
 
             <button onclick="submitOrder('Smart Watch')">
                 Submit Order
             </button>
-
         </div>
-
     </div>
 
 </div>
 
-
 <div class="order-success" id="successMessage"></div>
-
-
-<!-- ORDER STATUS CHECK -->
 
 <div class="status-check" id="status">
 
@@ -239,7 +227,6 @@
     <div class="status-box" id="statusResult"></div>
 
 </div>
-
 
 <script type="module">
 
@@ -268,7 +255,6 @@ const firebaseConfig = {
 
 
 const app = initializeApp(firebaseConfig);
-
 const database = getDatabase(app);
 
 
@@ -277,7 +263,6 @@ const database = getDatabase(app);
 window.showOrderForm = function() {
     document.getElementById("orderForm").style.display = "block";
 };
-
 
 window.showWatchForm = function() {
     document.getElementById("watchOrderForm").style.display = "block";
@@ -291,7 +276,6 @@ window.submitOrder = function(product) {
     let name;
     let phone;
     let address;
-
 
     if (product === "BMW Toy Car") {
 
@@ -307,20 +291,15 @@ window.submitOrder = function(product) {
 
     }
 
-
     if (!name || !phone || !address) {
 
         alert("Please fill all details!");
-
         return;
 
     }
 
-
     const ordersRef = ref(database, "orders");
-
     const newOrderRef = push(ordersRef);
-
 
     set(newOrderRef, {
 
@@ -336,17 +315,11 @@ window.submitOrder = function(product) {
         const orderId = newOrderRef.key;
 
         document.getElementById("successMessage").innerHTML =
-
             "🎉 <b>Order Submitted Successfully!</b><br><br>" +
-
             "Product: " + product + "<br>" +
-
-            "Name: " + name + "<br>" +
-
-            "<br><b>Your Order ID:</b><br>" +
-
+            "Name: " + name + "<br><br>" +
+            "<b>Your Order ID:</b><br>" +
             orderId +
-
             "<br><br>Please save this Order ID to track your order.";
 
         document.getElementById("successMessage").style.display = "block";
@@ -368,19 +341,15 @@ window.checkOrderStatus = function() {
     const orderId =
         document.getElementById("orderIdInput").value.trim();
 
-
     if (!orderId) {
 
         alert("Please enter your Order ID!");
-
         return;
 
     }
 
-
     const orderRef =
         ref(database, "orders/" + orderId);
-
 
     get(orderRef)
 
@@ -389,49 +358,40 @@ window.checkOrderStatus = function() {
         const result =
             document.getElementById("statusResult");
 
-
         if (snapshot.exists()) {
 
             const order = snapshot.val();
 
+            const status =
+                order.status || "Pending";
+
+            let statusClass;
+
+            if (status === "Pending") {
+                statusClass = "status-pending";
+            } else if (status === "Confirmed") {
+                statusClass = "status-confirmed";
+            } else {
+                statusClass = "status-delivered";
+            }
+
             result.innerHTML =
-
                 "<h3>Order Found!</h3>" +
-
                 "<p><b>Product:</b> " +
-                order.product + "</p>" +
-
-                const status = order.status || "Pending";
-
-let statusColor;
-
-if (status === "Pending") {
-    statusColor = "orange";
-} else if (status === "Confirmed") {
-    statusColor = "blue";
-} else {
-    statusColor = "green";
-}
-
-result.innerHTML =
-    "<h3>Order Found!</h3>" +
-    "<p><b>Product:</b> " + order.product + "</p>" +
-    "<p><b>Status:</b> <span style='color:" +
-    statusColor +
-    "; font-weight:bold;'>" +
-    status +
-    "</span></p>";
+                order.product +
+                "</p>" +
+                "<p><b>Status:</b> " +
+                "<span class='" + statusClass + "'>" +
+                status +
+                "</span></p>";
 
         } else {
 
             result.innerHTML =
-
                 "<h3>Order not found!</h3>" +
-
                 "<p>Please check your Order ID.</p>";
 
         }
-
 
         result.style.display = "block";
 
