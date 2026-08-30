@@ -1,13 +1,15 @@
-```html
 <!DOCTYPE html>
 <html>
 <head>
+
     <title>NEUROVA</title>
 
     <style>
+
         body {
             font-family: Arial;
             background-color: lightgray;
+            margin: 0;
         }
 
         .navbar {
@@ -57,11 +59,6 @@
             border-radius: 10px;
             margin: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-            transition: 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
         }
 
         .product-image {
@@ -80,6 +77,10 @@
             cursor: pointer;
         }
 
+        button:hover {
+            background-color: #333;
+        }
+
         .order-form {
             display: none;
             margin-top: 20px;
@@ -91,12 +92,14 @@
         .order-form input,
         .order-form textarea,
         #orderIdInput {
+
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
             box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 6px;
+
         }
 
         .order-form textarea {
@@ -104,135 +107,245 @@
             resize: none;
         }
 
-        .order-success,
-        .status-box {
+        .order-success {
             display: none;
             text-align: center;
             background-color: white;
-            padding: 15px;
-            margin: 20px auto;
-            border-radius: 8px;
-            width: 300px;
+            padding: 20px;
+            margin: 30px auto;
+            border-radius: 10px;
+            width: 350px;
         }
 
         .status-check {
-            background: white;
+            background-color: white;
             max-width: 400px;
             margin: 40px auto;
-            padding: 20px;
+            padding: 25px;
             border-radius: 10px;
             text-align: center;
         }
 
-        .status-pending {
-            color: orange;
-            font-weight: bold;
+        .status-box {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f7f7f7;
+            border-radius: 8px;
         }
 
-        .status-confirmed {
-            color: blue;
-            font-weight: bold;
-        }
-
-        .status-delivered {
-            color: green;
-            font-weight: bold;
-        }
     </style>
+
 </head>
+
 
 <body>
 
+
+<!-- NAVBAR -->
+
 <div class="navbar">
+
     <a href="#">Home</a>
-    <a href="#">Shop</a>
+
+    <a href="#products">Shop</a>
+
     <a href="#status">Track Order</a>
+
 </div>
+
+
+<!-- LOGO -->
 
 <h1 class="logo">NEUROVA</h1>
 
-<p class="tagline">Discover something you'll love.</p>
+<p class="tagline">
+    Discover something you'll love.
+</p>
 
-<h2 class="section-title">Our Products</h2>
+
+<!-- PRODUCTS -->
+
+<h2 class="section-title" id="products">
+    Our Products
+</h2>
+
 
 <div class="products">
 
+
+    <!-- BMW TOY CAR -->
+
     <div class="product-card">
+
         <h3>BMW Toy Car</h3>
 
-        <img class="product-image" src="car.jfif">
+        <img
+            class="product-image"
+            src="car.jfif"
+        >
 
         <p>₹4,000</p>
 
-        <button onclick="showOrderForm()">Buy Now</button>
+        <button onclick="showOrderForm()">
+            Buy Now
+        </button>
 
-        <div class="order-form" id="orderForm">
+
+        <div
+            class="order-form"
+            id="orderForm"
+        >
+
             <h3>Place Your Order</h3>
 
-            <input type="text" id="bmwName" placeholder="Your Name">
 
-            <input type="tel" id="bmwPhone" placeholder="Phone Number">
+            <input
+                type="text"
+                id="bmwName"
+                placeholder="Your Name"
+            >
 
-            <textarea id="bmwAddress"
-                placeholder="Delivery Address"></textarea>
 
-            <button onclick="submitOrder('BMW Toy Car')">
+            <input
+                type="tel"
+                id="bmwPhone"
+                placeholder="Phone Number"
+            >
+
+
+            <textarea
+                id="bmwAddress"
+                placeholder="Delivery Address"
+            ></textarea>
+
+
+            <button
+                onclick="submitOrder('BMW Toy Car')"
+            >
                 Submit Order
             </button>
+
         </div>
+
     </div>
 
+
+
+    <!-- SMART WATCH -->
+
     <div class="product-card">
+
         <h3>Smart Watch</h3>
 
-        <img class="product-image" src="watch.jfif">
+        <img
+            class="product-image"
+            src="watch.jfif"
+        >
 
         <p>₹1,299</p>
 
-        <button onclick="showWatchForm()">Buy Now</button>
+        <button onclick="showWatchForm()">
+            Buy Now
+        </button>
 
-        <div class="order-form" id="watchOrderForm">
+
+        <div
+            class="order-form"
+            id="watchOrderForm"
+        >
+
             <h3>Place Your Order</h3>
 
-            <input type="text" id="watchName" placeholder="Your Name">
 
-            <input type="tel" id="watchPhone" placeholder="Phone Number">
+            <input
+                type="text"
+                id="watchName"
+                placeholder="Your Name"
+            >
 
-            <textarea id="watchAddress"
-                placeholder="Delivery Address"></textarea>
 
-            <button onclick="submitOrder('Smart Watch')">
+            <input
+                type="tel"
+                id="watchPhone"
+                placeholder="Phone Number"
+            >
+
+
+            <textarea
+                id="watchAddress"
+                placeholder="Delivery Address"
+            ></textarea>
+
+
+            <button
+                onclick="submitOrder('Smart Watch')"
+            >
                 Submit Order
             </button>
+
         </div>
+
     </div>
 
 </div>
 
-<div class="order-success" id="successMessage"></div>
 
-<div class="status-check" id="status">
+
+<!-- SUCCESS MESSAGE -->
+
+<div
+    class="order-success"
+    id="successMessage"
+></div>
+
+
+
+<!-- TRACK ORDER -->
+
+<div
+    class="status-check"
+    id="status"
+>
 
     <h2>Track Your Order</h2>
+
+
+    <p>
+        Enter your Order ID
+    </p>
+
 
     <input
         type="text"
         id="orderIdInput"
-        placeholder="Enter your Order ID">
+        placeholder="Enter your Order ID"
+    >
+
 
     <button onclick="checkOrderStatus()">
         Check Status
     </button>
 
-    <div class="status-box" id="statusResult"></div>
+
+    <div
+        class="status-box"
+        id="statusResult"
+    ></div>
 
 </div>
 
+
+
+<!-- FIREBASE -->
+
 <script type="module">
+
 
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
 
 import {
     getDatabase,
@@ -243,170 +356,376 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
 
+
 const firebaseConfig = {
-    apiKey: "AIzaSyB8ujW3S_3l8DAHfT5rOZaFz5QlI7k0AtM",
-    authDomain: "neurova-2a935.firebaseapp.com",
-    databaseURL: "https://neurova-2a935-default-rtdb.firebaseio.com",
-    projectId: "neurova-2a935",
-    storageBucket: "neurova-2a935.firebasestorage.app",
-    messagingSenderId: "8072233485",
-    appId: "1:8072233485:web:9c6427def8d7abf2ff8b44"
+
+    apiKey:
+        "AIzaSyB8ujW3S_3l8DAHfT5rOZaFz5QlI7k0AtM",
+
+    authDomain:
+        "neurova-2a935.firebaseapp.com",
+
+    databaseURL:
+        "https://neurova-2a935-default-rtdb.firebaseio.com",
+
+    projectId:
+        "neurova-2a935",
+
+    storageBucket:
+        "neurova-2a935.firebasestorage.app",
+
+    messagingSenderId:
+        "8072233485",
+
+    appId:
+        "1:8072233485:web:9c6427def8d7abf2ff8b44"
+
 };
 
 
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+
+const app =
+    initializeApp(firebaseConfig);
 
 
-/* SHOW ORDER FORMS */
+const database =
+    getDatabase(app);
+
+
+
+/* BMW FORM */
 
 window.showOrderForm = function() {
-    document.getElementById("orderForm").style.display = "block";
+
+    document.getElementById(
+        "orderForm"
+    ).style.display = "block";
+
 };
 
+
+
+/* WATCH FORM */
+
 window.showWatchForm = function() {
-    document.getElementById("watchOrderForm").style.display = "block";
+
+    document.getElementById(
+        "watchOrderForm"
+    ).style.display = "block";
+
 };
+
 
 
 /* SUBMIT ORDER */
 
 window.submitOrder = function(product) {
 
+
     let name;
     let phone;
     let address;
 
+
     if (product === "BMW Toy Car") {
 
-        name = document.getElementById("bmwName").value;
-        phone = document.getElementById("bmwPhone").value;
-        address = document.getElementById("bmwAddress").value;
+
+        name =
+            document.getElementById(
+                "bmwName"
+            ).value.trim();
+
+
+        phone =
+            document.getElementById(
+                "bmwPhone"
+            ).value.trim();
+
+
+        address =
+            document.getElementById(
+                "bmwAddress"
+            ).value.trim();
+
 
     } else {
 
-        name = document.getElementById("watchName").value;
-        phone = document.getElementById("watchPhone").value;
-        address = document.getElementById("watchAddress").value;
+
+        name =
+            document.getElementById(
+                "watchName"
+            ).value.trim();
+
+
+        phone =
+            document.getElementById(
+                "watchPhone"
+            ).value.trim();
+
+
+        address =
+            document.getElementById(
+                "watchAddress"
+            ).value.trim();
 
     }
 
-    if (!name || !phone || !address) {
 
-        alert("Please fill all details!");
+
+    if (
+        !name ||
+        !phone ||
+        !address
+    ) {
+
+        alert(
+            "Please fill all details!"
+        );
+
         return;
 
     }
 
-    const ordersRef = ref(database, "orders");
-    const newOrderRef = push(ordersRef);
 
-    set(newOrderRef, {
 
-        product: product,
-        name: name,
-        phone: phone,
-        address: address,
-        status: "Pending"
+    /* ORDERS DATABASE */
 
-    })
-    .then(() => {
+    const ordersRef =
+        ref(
+            database,
+            "orders"
+        );
 
-        const orderId = newOrderRef.key;
 
-        document.getElementById("successMessage").innerHTML =
-            "🎉 <b>Order Submitted Successfully!</b><br><br>" +
-            "Product: " + product + "<br>" +
-            "Name: " + name + "<br><br>" +
-            "<b>Your Order ID:</b><br>" +
+    const newOrderRef =
+        push(ordersRef);
+
+
+
+    /* SAVE ORDER */
+
+    set(
+        newOrderRef,
+        {
+
+            product: product,
+
+            name: name,
+
+            phone: phone,
+
+            address: address,
+
+            status: "Pending"
+
+        }
+
+    )
+
+    .then(function() {
+
+
+        const orderId =
+            newOrderRef.key;
+
+
+
+        document.getElementById(
+            "successMessage"
+        ).innerHTML =
+
+
+            "<h3>🎉 Order Submitted Successfully!</h3>" +
+
+
+            "<p><b>Product:</b> " +
+            product +
+            "</p>" +
+
+
+            "<p><b>Name:</b> " +
+            name +
+            "</p>" +
+
+
+            "<p><b>Your Order ID:</b></p>" +
+
+
+            "<p><b>" +
             orderId +
-            "<br><br>Please save this Order ID to track your order.";
+            "</b></p>" +
 
-        document.getElementById("successMessage").style.display = "block";
+
+            "<p>Please save this Order ID to track your order.</p>";
+
+
+
+        document.getElementById(
+            "successMessage"
+        ).style.display = "block";
+
+
+
+        /* CLEAR FORM */
+
+        if (product === "BMW Toy Car") {
+
+            document.getElementById(
+                "bmwName"
+            ).value = "";
+
+            document.getElementById(
+                "bmwPhone"
+            ).value = "";
+
+            document.getElementById(
+                "bmwAddress"
+            ).value = "";
+
+        } else {
+
+            document.getElementById(
+                "watchName"
+            ).value = "";
+
+            document.getElementById(
+                "watchPhone"
+            ).value = "";
+
+            document.getElementById(
+                "watchAddress"
+            ).value = "";
+
+        }
+
 
     })
-    .catch((error) => {
 
-        alert("Error: " + error.message);
+    .catch(function(error) {
+
+        alert(
+            "Error: " +
+            error.message
+        );
 
     });
 
 };
+
 
 
 /* CHECK ORDER STATUS */
 
 window.checkOrderStatus = function() {
 
+
     const orderId =
-        document.getElementById("orderIdInput").value.trim();
+        document.getElementById(
+            "orderIdInput"
+        ).value.trim();
+
+
 
     if (!orderId) {
 
-        alert("Please enter your Order ID!");
+        alert(
+            "Please enter your Order ID!"
+        );
+
         return;
 
     }
 
+
+
     const orderRef =
-        ref(database, "orders/" + orderId);
+        ref(
+            database,
+            "orders/" + orderId
+        );
+
+
 
     get(orderRef)
 
-    .then((snapshot) => {
+    .then(function(snapshot) {
+
 
         const result =
-            document.getElementById("statusResult");
+            document.getElementById(
+                "statusResult"
+            );
+
+
 
         if (snapshot.exists()) {
 
-            const order = snapshot.val();
 
-            const status =
-                order.status || "Pending";
+            const order =
+                snapshot.val();
 
-            let statusClass;
 
-            if (status === "Pending") {
-                statusClass = "status-pending";
-            } else if (status === "Confirmed") {
-                statusClass = "status-confirmed";
-            } else {
-                statusClass = "status-delivered";
-            }
+
+            const currentStatus =
+                order.status ||
+                "Pending";
+
+
 
             result.innerHTML =
+
+
                 "<h3>Order Found!</h3>" +
+
+
                 "<p><b>Product:</b> " +
                 order.product +
                 "</p>" +
+
+
                 "<p><b>Status:</b> " +
-                "<span class='" + statusClass + "'>" +
-                status +
-                "</span></p>";
+                currentStatus +
+                "</p>";
+
+
 
         } else {
 
+
             result.innerHTML =
-                "<h3>Order not found!</h3>" +
+
+
+                "<h3>Order Not Found!</h3>" +
+
+
                 "<p>Please check your Order ID.</p>";
 
         }
 
-        result.style.display = "block";
+
+
+        result.style.display =
+            "block";
+
+
 
     })
 
-    .catch((error) => {
+    .catch(function(error) {
 
-        alert("Error: " + error.message);
+
+        alert(
+            "Error: " +
+            error.message
+        );
 
     });
 
 };
 
+
 </script>
+
 
 </body>
 </html>
-```
