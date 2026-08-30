@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <title>NEUROVA</title>
 
     <style>
-
         body {
             font-family: Arial;
             background-color: lightgray;
@@ -61,6 +59,11 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.12);
         }
 
+        .product-card:hover {
+            transform: translateY(-5px);
+            transition: 0.3s;
+        }
+
         .product-image {
             width: 100%;
             height: 220px;
@@ -78,7 +81,7 @@
         }
 
         button:hover {
-            background-color: #333;
+            opacity: 0.8;
         }
 
         .order-form {
@@ -91,15 +94,13 @@
 
         .order-form input,
         .order-form textarea,
-        #orderIdInput {
-
+        .order-form select {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
             box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 6px;
-
         }
 
         .order-form textarea {
@@ -107,72 +108,59 @@
             resize: none;
         }
 
-        .order-success {
+        .total-price {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .order-success,
+        .status-box {
             display: none;
             text-align: center;
             background-color: white;
-            padding: 20px;
-            margin: 30px auto;
-            border-radius: 10px;
-            width: 350px;
+            padding: 15px;
+            margin: 20px auto;
+            border-radius: 8px;
+            width: 300px;
         }
 
         .status-check {
-            background-color: white;
+            background: white;
             max-width: 400px;
             margin: 40px auto;
-            padding: 25px;
+            padding: 20px;
             border-radius: 10px;
             text-align: center;
         }
 
-        .status-box {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f7f7f7;
-            border-radius: 8px;
+        #orderIdInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
-<!-- NAVBAR -->
-
 <div class="navbar">
-
     <a href="#">Home</a>
-
-    <a href="#products">Shop</a>
-
+    <a href="#">Shop</a>
     <a href="#status">Track Order</a>
-
 </div>
-
-
-<!-- LOGO -->
 
 <h1 class="logo">NEUROVA</h1>
 
-<p class="tagline">
-    Discover something you'll love.
-</p>
+<p class="tagline">Discover something you'll love.</p>
 
-
-<!-- PRODUCTS -->
-
-<h2 class="section-title" id="products">
-    Our Products
-</h2>
+<h2 class="section-title">Our Products</h2>
 
 
 <div class="products">
-
 
     <!-- BMW TOY CAR -->
 
@@ -192,13 +180,9 @@
         </button>
 
 
-        <div
-            class="order-form"
-            id="orderForm"
-        >
+        <div class="order-form" id="orderForm">
 
             <h3>Place Your Order</h3>
-
 
             <input
                 type="text"
@@ -206,18 +190,40 @@
                 placeholder="Your Name"
             >
 
-
             <input
                 type="tel"
                 id="bmwPhone"
                 placeholder="Phone Number"
             >
 
-
             <textarea
                 id="bmwAddress"
                 placeholder="Delivery Address"
             ></textarea>
+
+
+            <label>
+                <b>Quantity:</b>
+            </label>
+
+            <select
+                id="bmwQuantity"
+                onchange="calculateBMWTotal()"
+            >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+
+            <div
+                class="total-price"
+                id="bmwTotal"
+            >
+                Total: ₹4,000
+            </div>
 
 
             <button
@@ -229,7 +235,6 @@
         </div>
 
     </div>
-
 
 
     <!-- SMART WATCH -->
@@ -257,13 +262,11 @@
 
             <h3>Place Your Order</h3>
 
-
             <input
                 type="text"
                 id="watchName"
                 placeholder="Your Name"
             >
-
 
             <input
                 type="tel"
@@ -271,11 +274,34 @@
                 placeholder="Phone Number"
             >
 
-
             <textarea
                 id="watchAddress"
                 placeholder="Delivery Address"
             ></textarea>
+
+
+            <label>
+                <b>Quantity:</b>
+            </label>
+
+            <select
+                id="watchQuantity"
+                onchange="calculateWatchTotal()"
+            >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+
+            <div
+                class="total-price"
+                id="watchTotal"
+            >
+                Total: ₹1,299
+            </div>
 
 
             <button
@@ -291,14 +317,10 @@
 </div>
 
 
-
-<!-- SUCCESS MESSAGE -->
-
 <div
     class="order-success"
     id="successMessage"
 ></div>
-
 
 
 <!-- TRACK ORDER -->
@@ -310,23 +332,15 @@
 
     <h2>Track Your Order</h2>
 
-
-    <p>
-        Enter your Order ID
-    </p>
-
-
     <input
         type="text"
         id="orderIdInput"
         placeholder="Enter your Order ID"
     >
 
-
     <button onclick="checkOrderStatus()">
         Check Status
     </button>
-
 
     <div
         class="status-box"
@@ -336,16 +350,11 @@
 </div>
 
 
-
-<!-- FIREBASE -->
-
 <script type="module">
-
 
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
 
 import {
     getDatabase,
@@ -354,7 +363,6 @@ import {
     set,
     get
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
-
 
 
 const firebaseConfig = {
@@ -383,17 +391,14 @@ const firebaseConfig = {
 };
 
 
-
 const app =
     initializeApp(firebaseConfig);
-
 
 const database =
     getDatabase(app);
 
 
-
-/* BMW FORM */
+/* SHOW FORMS */
 
 window.showOrderForm = function() {
 
@@ -404,9 +409,6 @@ window.showOrderForm = function() {
 };
 
 
-
-/* WATCH FORM */
-
 window.showWatchForm = function() {
 
     document.getElementById(
@@ -416,67 +418,119 @@ window.showWatchForm = function() {
 };
 
 
+/* CALCULATE BMW TOTAL */
+
+window.calculateBMWTotal = function() {
+
+    const quantity =
+        Number(
+            document.getElementById(
+                "bmwQuantity"
+            ).value
+        );
+
+    const total =
+        4000 * quantity;
+
+    document.getElementById(
+        "bmwTotal"
+    ).innerText =
+        "Total: ₹" + total.toLocaleString("en-IN");
+
+};
+
+
+/* CALCULATE WATCH TOTAL */
+
+window.calculateWatchTotal = function() {
+
+    const quantity =
+        Number(
+            document.getElementById(
+                "watchQuantity"
+            ).value
+        );
+
+    const total =
+        1299 * quantity;
+
+    document.getElementById(
+        "watchTotal"
+    ).innerText =
+        "Total: ₹" + total.toLocaleString("en-IN");
+
+};
+
 
 /* SUBMIT ORDER */
 
 window.submitOrder = function(product) {
 
-
     let name;
     let phone;
     let address;
+    let quantity;
+    let total;
 
 
     if (product === "BMW Toy Car") {
-
 
         name =
             document.getElementById(
                 "bmwName"
             ).value.trim();
 
-
         phone =
             document.getElementById(
                 "bmwPhone"
             ).value.trim();
-
 
         address =
             document.getElementById(
                 "bmwAddress"
             ).value.trim();
 
+        quantity =
+            Number(
+                document.getElementById(
+                    "bmwQuantity"
+                ).value
+            );
+
+        total =
+            4000 * quantity;
 
     } else {
-
 
         name =
             document.getElementById(
                 "watchName"
             ).value.trim();
 
-
         phone =
             document.getElementById(
                 "watchPhone"
             ).value.trim();
-
 
         address =
             document.getElementById(
                 "watchAddress"
             ).value.trim();
 
+        quantity =
+            Number(
+                document.getElementById(
+                    "watchQuantity"
+                ).value
+            );
+
+        total =
+            1299 * quantity;
+
     }
 
 
-
-    if (
-        !name ||
-        !phone ||
-        !address
-    ) {
+    if (!name || !phone || !address) {
 
         alert(
             "Please fill all details!"
@@ -487,77 +541,62 @@ window.submitOrder = function(product) {
     }
 
 
-
-    /* ORDERS DATABASE */
-
     const ordersRef =
-        ref(
-            database,
-            "orders"
-        );
-
+        ref(database, "orders");
 
     const newOrderRef =
         push(ordersRef);
 
 
+    set(newOrderRef, {
 
-    /* SAVE ORDER */
+        product: product,
 
-    set(
-        newOrderRef,
-        {
+        name: name,
 
-            product: product,
+        phone: phone,
 
-            name: name,
+        address: address,
 
-            phone: phone,
+        quantity: quantity,
 
-            address: address,
+        total: total,
 
-            status: "Pending"
+        status: "Pending"
 
-        }
+    })
 
-    )
-
-    .then(function() {
-
+    .then(() => {
 
         const orderId =
             newOrderRef.key;
-
 
 
         document.getElementById(
             "successMessage"
         ).innerHTML =
 
+            "🎉 <b>Order Submitted Successfully!</b><br><br>" +
 
-            "<h3>🎉 Order Submitted Successfully!</h3>" +
-
-
-            "<p><b>Product:</b> " +
+            "Product: " +
             product +
-            "</p>" +
+            "<br>" +
 
+            "Quantity: " +
+            quantity +
+            "<br>" +
 
-            "<p><b>Name:</b> " +
-            name +
-            "</p>" +
+            "Total: ₹" +
+            total.toLocaleString("en-IN") +
+            "<br><br>" +
 
+            "<b>Your Order ID:</b><br>" +
 
-            "<p><b>Your Order ID:</b></p>" +
-
-
-            "<p><b>" +
             orderId +
-            "</b></p>" +
 
+            "<br><br>" +
 
-            "<p>Please save this Order ID to track your order.</p>";
-
+            "Please save this Order ID to track your order.";
 
 
         document.getElementById(
@@ -565,43 +604,14 @@ window.submitOrder = function(product) {
         ).style.display = "block";
 
 
-
-        /* CLEAR FORM */
-
-        if (product === "BMW Toy Car") {
-
-            document.getElementById(
-                "bmwName"
-            ).value = "";
-
-            document.getElementById(
-                "bmwPhone"
-            ).value = "";
-
-            document.getElementById(
-                "bmwAddress"
-            ).value = "";
-
-        } else {
-
-            document.getElementById(
-                "watchName"
-            ).value = "";
-
-            document.getElementById(
-                "watchPhone"
-            ).value = "";
-
-            document.getElementById(
-                "watchAddress"
-            ).value = "";
-
-        }
-
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
 
     })
 
-    .catch(function(error) {
+    .catch((error) => {
 
         alert(
             "Error: " +
@@ -613,17 +623,14 @@ window.submitOrder = function(product) {
 };
 
 
-
 /* CHECK ORDER STATUS */
 
 window.checkOrderStatus = function() {
-
 
     const orderId =
         document.getElementById(
             "orderIdInput"
         ).value.trim();
-
 
 
     if (!orderId) {
@@ -637,7 +644,6 @@ window.checkOrderStatus = function() {
     }
 
 
-
     const orderRef =
         ref(
             database,
@@ -645,11 +651,9 @@ window.checkOrderStatus = function() {
         );
 
 
-
     get(orderRef)
 
-    .then(function(snapshot) {
-
+    .then((snapshot) => {
 
         const result =
             document.getElementById(
@@ -657,62 +661,87 @@ window.checkOrderStatus = function() {
             );
 
 
-
         if (snapshot.exists()) {
-
 
             const order =
                 snapshot.val();
 
 
-
-            const currentStatus =
+            let status =
                 order.status ||
                 "Pending";
 
 
+            let statusColor =
+                "orange";
+
+
+            if (status === "Confirmed") {
+
+                statusColor = "blue";
+
+            }
+
+            else if (status === "Shipped") {
+
+                statusColor = "purple";
+
+            }
+
+            else if (status === "Delivered") {
+
+                statusColor = "green";
+
+            }
+
 
             result.innerHTML =
 
-
                 "<h3>Order Found!</h3>" +
-
 
                 "<p><b>Product:</b> " +
                 order.product +
                 "</p>" +
 
+                "<p><b>Quantity:</b> " +
+                (order.quantity || 1) +
+                "</p>" +
+
+                "<p><b>Total:</b> ₹" +
+                Number(
+                    order.total || 0
+                ).toLocaleString("en-IN") +
+                "</p>" +
 
                 "<p><b>Status:</b> " +
-                currentStatus +
-                "</p>";
 
+                "<span style='color:" +
+                statusColor +
+                "; font-weight:bold;'>" +
 
+                status +
 
-        } else {
+                "</span></p>";
 
+        }
+
+        else {
 
             result.innerHTML =
 
-
-                "<h3>Order Not Found!</h3>" +
-
+                "<h3>Order not found!</h3>" +
 
                 "<p>Please check your Order ID.</p>";
 
         }
 
 
-
         result.style.display =
             "block";
 
-
-
     })
 
-    .catch(function(error) {
-
+    .catch((error) => {
 
         alert(
             "Error: " +
@@ -723,9 +752,7 @@ window.checkOrderStatus = function() {
 
 };
 
-
 </script>
-
 
 </body>
 </html>
