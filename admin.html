@@ -84,6 +84,11 @@
         #loginError {
             color: red;
         }
+
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -266,6 +271,14 @@ onValue(ordersRef, (snapshot) => {
             order.status || "Pending";
 
 
+        const quantity =
+            order.quantity || 1;
+
+
+        const total =
+            order.total || 0;
+
+
         ordersDiv.innerHTML += `
 
             <div class="order">
@@ -290,6 +303,15 @@ onValue(ordersRef, (snapshot) => {
                 <p>
                     <b>Order ID:</b>
                     ${orderId}
+                </p>
+
+                <p>
+                    <b>Quantity:</b>
+                    ${quantity}
+                </p>
+
+                <p class="total">
+                    Total: ₹${Number(total).toLocaleString("en-IN")}
                 </p>
 
                 <p>
