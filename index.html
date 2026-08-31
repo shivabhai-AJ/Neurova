@@ -2,283 +2,282 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NEUROVA - Discover Something You'll Love</title>
+<title>NEUROVA - Discover Something You'll Love</title>
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+*{
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            color: #111;
-        }
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f2f2f2;
+    color:#111;
+}
 
-        /* NAVBAR */
+/* NAVBAR */
 
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: #111;
-            padding: 18px 20px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#111;
+    padding:18px 20px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
 
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin: 0 18px;
-            font-size: 16px;
-            font-weight: bold;
-        }
+.navbar a{
+    color:white;
+    text-decoration:none;
+    margin:0 18px;
+    font-size:16px;
+    font-weight:bold;
+}
 
-        .navbar a:hover {
-            text-decoration: underline;
-        }
+.navbar a:hover{
+    text-decoration:underline;
+}
 
-        /* HERO */
+/* HERO */
 
-        .hero {
-            min-height: 420px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 60px 20px;
-            background: white;
-        }
+.hero{
+    min-height:420px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:60px 20px;
+    background:white;
+}
 
-        .logo {
-            font-size: 58px;
-            letter-spacing: 9px;
-            margin: 0 0 15px;
-            font-weight: bold;
-        }
+.logo{
+    font-size:58px;
+    letter-spacing:9px;
+    margin:0 0 15px;
+    font-weight:bold;
+}
 
-        .tagline {
-            font-size: 20px;
-            color: #666;
-            margin-bottom: 30px;
-        }
+.tagline{
+    font-size:20px;
+    color:#666;
+    margin-bottom:30px;
+}
 
-        .hero-button {
-            display: inline-block;
-            background: #111;
-            color: white;
-            text-decoration: none;
-            padding: 14px 30px;
-            border-radius: 8px;
-            font-weight: bold;
-        }
+.hero-button{
+    display:inline-block;
+    background:#111;
+    color:white;
+    text-decoration:none;
+    padding:14px 30px;
+    border-radius:8px;
+    font-weight:bold;
+}
 
-        .hero-button:hover {
-            opacity: 0.8;
-        }
+.hero-button:hover{
+    opacity:.8;
+}
 
-        /* SECTION */
+/* SECTION */
 
-        .section {
-            padding: 60px 20px;
-        }
+.section{
+    padding:60px 20px;
+}
 
-        .section-title {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 35px;
-        }
+.section-title{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:35px;
+}
 
-        /* PRODUCTS */
+/* PRODUCTS */
 
-        .products {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            max-width: 1100px;
-            margin: auto;
-        }
+.products{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    max-width:1100px;
+    margin:auto;
+}
 
-        .product-card {
-            background: white;
-            width: 320px;
-            padding: 22px;
-            border-radius: 14px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
-            transition: 0.3s;
-        }
+.product-card{
+    background:white;
+    width:320px;
+    padding:22px;
+    border-radius:14px;
+    box-shadow:0 3px 12px rgba(0,0,0,.12);
+    transition:.3s;
+}
 
-        .product-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.18);
-        }
+.product-card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 8px 20px rgba(0,0,0,.18);
+}
 
-        .product-image {
-            width: 100%;
-            height: 230px;
-            object-fit: cover;
-            border-radius: 10px;
-            background: #ddd;
-        }
+.product-image{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+    border-radius:10px;
+    background:#ddd;
+}
 
-        .product-card h3 {
-            font-size: 21px;
-        }
+.product-card h3{
+    font-size:21px;
+}
 
-        .price {
-            font-size: 20px;
-            font-weight: bold;
-        }
+.price{
+    font-size:20px;
+    font-weight:bold;
+}
 
-        /* BUTTON */
+/* BUTTON */
 
-        button {
-            background: #111;
-            color: white;
-            border: none;
-            padding: 12px 22px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+button{
+    background:#111;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
 
-        button:hover {
-            opacity: 0.8;
-        }
+button:hover{
+    opacity:.8;
+}
 
-        /* ORDER FORM */
+/* ORDER FORM */
 
-        .order-form {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background: #f5f5f5;
-            border-radius: 10px;
-        }
+.order-form{
+    display:none;
+    margin-top:20px;
+    padding:20px;
+    background:#f5f5f5;
+    border-radius:10px;
+}
 
-        .order-form h3 {
-            margin-top: 0;
-        }
+.order-form h3{
+    margin-top:0;
+}
 
-        .order-form input,
-        .order-form textarea,
-        #orderIdInput {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 12px;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-            font-size: 14px;
-        }
+.order-form input,
+.order-form textarea,
+#orderIdInput{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:14px;
+}
 
-        .order-form textarea {
-            height: 90px;
-            resize: none;
-        }
+.order-form textarea{
+    height:90px;
+    resize:none;
+}
 
-        /* SUCCESS */
+/* SUCCESS */
 
-        .order-success {
-            display: none;
-            background: white;
-            max-width: 500px;
-            margin: 30px auto;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
-        }
+.order-success{
+    display:none;
+    background:white;
+    max-width:500px;
+    margin:30px auto;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.12);
+}
 
-        /* TRACK ORDER */
+/* TRACK ORDER */
 
-        .status-check {
-            background: white;
-            max-width: 500px;
-            margin: 60px auto;
-            padding: 30px;
-            border-radius: 14px;
-            text-align: center;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
-        }
+.status-check{
+    background:white;
+    max-width:500px;
+    margin:60px auto;
+    padding:30px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.12);
+}
 
-        .status-check h2 {
-            font-size: 28px;
-        }
+.status-check h2{
+    font-size:28px;
+}
 
-        .status-box {
-            display: none;
-            margin-top: 20px;
-            padding: 18px;
-            background: #f5f5f5;
-            border-radius: 10px;
-        }
+.status-box{
+    display:none;
+    margin-top:20px;
+    padding:18px;
+    background:#f5f5f5;
+    border-radius:10px;
+}
 
-        /* ABOUT */
+/* ABOUT */
 
-        .about-section {
-            background: white;
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 40px 30px;
-            border-radius: 14px;
-            text-align: center;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
-        }
+.about-section{
+    background:white;
+    max-width:800px;
+    margin:60px auto;
+    padding:40px 30px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.12);
+}
 
-        .about-section h2 {
-            font-size: 32px;
-        }
+.about-section h2{
+    font-size:32px;
+}
 
-        .about-section p {
-            color: #666;
-            line-height: 1.8;
-            font-size: 16px;
-        }
+.about-section p{
+    color:#666;
+    line-height:1.8;
+    font-size:16px;
+}
 
-        /* FOOTER */
+/* FOOTER */
 
-        footer {
-            background: #111;
-            color: white;
-            text-align: center;
-            padding: 25px;
-            margin-top: 60px;
-        }
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:60px;
+}
 
-        /* MOBILE */
+/* MOBILE */
 
-        @media (max-width: 600px) {
+@media(max-width:600px){
 
-            .navbar a {
-                margin: 0 7px;
-                font-size: 14px;
-            }
+    .navbar a{
+        margin:0 7px;
+        font-size:14px;
+    }
 
-            .logo {
-                font-size: 40px;
-                letter-spacing: 5px;
-            }
+    .logo{
+        font-size:40px;
+        letter-spacing:5px;
+    }
 
-            .product-card {
-                width: 100%;
-                max-width: 340px;
-            }
+    .product-card{
+        width:100%;
+        max-width:340px;
+    }
 
-        }
+}
 
-    </style>
+</style>
 
 </head>
-
 
 <body>
 
@@ -298,8 +297,7 @@
 </div>
 
 
-
-<!-- HERO / HOME -->
+<!-- HOME -->
 
 <section class="hero" id="home">
 
@@ -318,7 +316,6 @@
 </section>
 
 
-
 <!-- SHOP -->
 
 <section class="section" id="shop">
@@ -331,13 +328,13 @@
     <div class="products">
 
 
-        <!-- BMW TOY CAR -->
+        <!-- BMW -->
 
         <div class="product-card">
 
             <img
                 class="product-image"
-                src="car.jfif"
+                src="IMAGES/car.jfif"
                 alt="BMW Toy Car"
             >
 
@@ -395,14 +392,13 @@
         </div>
 
 
-
-        <!-- SMART WATCH -->
+        <!-- WATCH -->
 
         <div class="product-card">
 
             <img
                 class="product-image"
-                src="watch.jfif"
+                src="IMAGES/watch.jfif"
                 alt="Smart Watch"
             >
 
@@ -464,15 +460,13 @@
 </section>
 
 
-
-<!-- SUCCESS MESSAGE -->
+<!-- SUCCESS -->
 
 <div
     class="order-success"
     id="successMessage"
 >
 </div>
-
 
 
 <!-- TRACK ORDER -->
@@ -509,7 +503,6 @@
 </div>
 
 
-
 <!-- ABOUT -->
 
 <div
@@ -536,7 +529,6 @@
 </div>
 
 
-
 <!-- FOOTER -->
 
 <footer>
@@ -552,7 +544,6 @@
 </footer>
 
 
-
 <!-- FIREBASE -->
 
 <script type="module">
@@ -563,6 +554,13 @@ import {
 
 
 import {
+    getAuth,
+    signInAnonymously,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+import {
     getDatabase,
     ref,
     push,
@@ -570,6 +568,8 @@ import {
     get
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
+
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
@@ -597,18 +597,73 @@ const firebaseConfig = {
 };
 
 
+/* INITIALIZE */
+
 const app =
     initializeApp(firebaseConfig);
 
+const auth =
+    getAuth(app);
 
 const database =
     getDatabase(app);
 
 
+/* CUSTOMER AUTH */
+
+let currentUser = null;
+
+const authReady =
+    new Promise((resolve) => {
+
+        onAuthStateChanged(
+            auth,
+            async (user) => {
+
+                if (user) {
+
+                    currentUser = user;
+
+                    resolve(user);
+
+                }
+
+                else {
+
+                    try {
+
+                        const result =
+                            await signInAnonymously(auth);
+
+                        currentUser =
+                            result.user;
+
+                        resolve(result.user);
+
+                    }
+
+                    catch(error) {
+
+                        console.error(
+                            "Anonymous login error:",
+                            error
+                        );
+
+                        resolve(null);
+
+                    }
+
+                }
+
+            }
+        );
+
+    });
+
 
 /* BMW FORM */
 
-window.showOrderForm = function() {
+window.showOrderForm = function(){
 
     document.getElementById(
         "orderForm"
@@ -617,10 +672,9 @@ window.showOrderForm = function() {
 };
 
 
-
 /* WATCH FORM */
 
-window.showWatchForm = function() {
+window.showWatchForm = function(){
 
     document.getElementById(
         "watchOrderForm"
@@ -629,17 +683,30 @@ window.showWatchForm = function() {
 };
 
 
-
 /* SUBMIT ORDER */
 
-window.submitOrder = function(product) {
+window.submitOrder = async function(product){
+
+    await authReady;
+
+
+    if(!currentUser){
+
+        alert(
+            "Connection error. Please refresh the page."
+        );
+
+        return;
+
+    }
+
 
     let name;
     let phone;
     let address;
 
 
-    if (product === "BMW Toy Car") {
+    if(product === "BMW Toy Car"){
 
         name =
             document.getElementById(
@@ -658,7 +725,7 @@ window.submitOrder = function(product) {
 
     }
 
-    else {
+    else{
 
         name =
             document.getElementById(
@@ -678,7 +745,7 @@ window.submitOrder = function(product) {
     }
 
 
-    if (!name || !phone || !address) {
+    if(!name || !phone || !address){
 
         alert(
             "Please fill all details!"
@@ -689,56 +756,71 @@ window.submitOrder = function(product) {
     }
 
 
-    const ordersRef =
-        ref(
-            database,
-            "orders"
+    try{
+
+        const ordersRef =
+            ref(
+                database,
+                "orders"
+            );
+
+
+        const newOrderRef =
+            push(ordersRef);
+
+
+        await set(
+            newOrderRef,
+            {
+
+                uid:
+                    currentUser.uid,
+
+                product:
+                    product,
+
+                name:
+                    name,
+
+                phone:
+                    phone,
+
+                address:
+                    address,
+
+                status:
+                    "Pending",
+
+                createdAt:
+                    Date.now()
+
+            }
         );
 
-
-    const newOrderRef =
-        push(ordersRef);
-
-
-    set(
-        newOrderRef,
-        {
-
-            product: product,
-
-            name: name,
-
-            phone: phone,
-
-            address: address,
-
-            status: "Pending"
-
-        }
-
-    )
-
-    .then(() => {
 
         const orderId =
             newOrderRef.key;
 
 
-        document.getElementById(
-            "successMessage"
-        ).innerHTML =
+        const success =
+            document.getElementById(
+                "successMessage"
+            );
+
+
+        success.innerHTML =
 
             "<b>🎉 Order Submitted Successfully!</b>" +
 
             "<br><br>" +
 
             "Product: " +
-            product +
+            escapeHTML(product) +
 
             "<br>" +
 
             "Name: " +
-            name +
+            escapeHTML(name) +
 
             "<br><br>" +
 
@@ -746,51 +828,65 @@ window.submitOrder = function(product) {
 
             "<br>" +
 
-            orderId +
+            "<strong>" +
+            escapeHTML(orderId) +
+            "</strong>" +
 
             "<br><br>" +
 
             "Please save this Order ID.";
 
-        
-        document.getElementById(
-            "successMessage"
-        ).style.display = "block";
+
+        success.style.display =
+            "block";
 
 
-        document.getElementById(
-            "successMessage"
-        ).scrollIntoView({
-            behavior: "smooth"
+        success.scrollIntoView({
+            behavior:"smooth"
         });
 
-    })
 
-    .catch((error) => {
+    }
+
+    catch(error){
+
+        console.error(error);
 
         alert(
             "Error: " +
             error.message
         );
 
-    });
+    }
 
 };
 
 
+/* TRACK ORDER */
 
-/* CHECK ORDER STATUS */
+window.checkOrderStatus = async function(){
 
-window.checkOrderStatus = function() {
+    await authReady;
+
+
+    if(!currentUser){
+
+        alert(
+            "Connection error. Please refresh the page."
+        );
+
+        return;
+
+    }
+
 
     const orderId =
-
         document.getElementById(
             "orderIdInput"
         ).value.trim();
 
 
-    if (!orderId) {
+    if(!orderId){
 
         alert(
             "Please enter your Order ID!"
@@ -801,29 +897,47 @@ window.checkOrderStatus = function() {
     }
 
 
-    const orderRef =
+    try{
 
-        ref(
-            database,
-            "orders/" + orderId
-        );
+        const orderRef =
+            ref(
+                database,
+                "orders/" + orderId
+            );
 
 
-    get(orderRef)
+        const snapshot =
+            await get(orderRef);
 
-    .then((snapshot) => {
 
         const result =
-
             document.getElementById(
                 "statusResult"
             );
 
 
-        if (snapshot.exists()) {
+        if(snapshot.exists()){
 
             const order =
                 snapshot.val();
+
+
+            /* SECURITY CHECK */
+
+            if(order.uid !== currentUser.uid){
+
+                result.innerHTML =
+
+                    "<h3>Order not found!</h3>" +
+
+                    "<p>Please check your Order ID.</p>";
+
+                result.style.display =
+                    "block";
+
+                return;
+
+            }
 
 
             const status =
@@ -834,25 +948,25 @@ window.checkOrderStatus = function() {
             let statusColor;
 
 
-            if (status === "Pending") {
+            if(status === "Pending"){
 
                 statusColor = "orange";
 
             }
 
-            else if (status === "Confirmed") {
+            else if(status === "Confirmed"){
 
                 statusColor = "blue";
 
             }
 
-            else if (status === "Shipped") {
+            else if(status === "Shipped"){
 
                 statusColor = "purple";
 
             }
 
-            else {
+            else{
 
                 statusColor = "green";
 
@@ -864,22 +978,27 @@ window.checkOrderStatus = function() {
                 "<h3>Order Found!</h3>" +
 
                 "<p><b>Product:</b> " +
-                order.product +
+
+                escapeHTML(
+                    order.product || ""
+                ) +
+
                 "</p>" +
 
                 "<p><b>Status:</b> " +
 
                 "<span style='color:" +
                 statusColor +
-                "; font-weight:bold;'>" +
+                ";font-weight:bold;'>" +
 
-                status +
+                escapeHTML(status) +
 
                 "</span></p>";
 
         }
 
-        else {
+
+        else{
 
             result.innerHTML =
 
@@ -895,25 +1014,44 @@ window.checkOrderStatus = function() {
 
 
         result.scrollIntoView({
-            behavior: "smooth"
+            behavior:"smooth"
         });
 
-    })
 
-    .catch((error) => {
+    }
+
+    catch(error){
+
+        console.error(error);
 
         alert(
-            "Error: " +
-            error.message
+            "Unable to check order."
         );
 
-    });
+    }
 
 };
 
+
+/* BASIC HTML ESCAPE */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
 </script>
 
-
 </body>
-
 </html>
