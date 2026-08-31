@@ -4,107 +4,216 @@
     <title>NEUROVA Admin</title>
 
     <style>
-        body {
-            font-family: Arial;
-            background: lightgray;
-            margin: 0;
-            padding: 30px;
+        * {
+            box-sizing: border-box;
         }
 
-        h1 {
-            text-align: center;
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            font-family: Arial, sans-serif;
+            background: #f1f1f1;
+            color: #111;
         }
+
+        /* LOGIN */
 
         #loginBox {
+            width: 100%;
+            max-width: 390px;
+            margin: 90px auto;
+            padding: 35px;
             background: white;
-            max-width: 350px;
-            margin: 100px auto;
-            padding: 30px;
-            border-radius: 10px;
+            border-radius: 16px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        #loginBox h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 26px;
         }
 
         #loginBox input {
             width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            box-sizing: border-box;
+            padding: 14px;
+            margin: 7px 0;
             border: 1px solid #ccc;
-            border-radius: 6px;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        #loginBox input:focus {
+            border-color: #111;
+        }
+
+        #loginButton {
+            width: 100%;
+            margin-top: 12px;
         }
 
         button {
-            background: black;
+            background: #111;
             color: white;
             border: none;
-            padding: 10px 18px;
-            border-radius: 6px;
+            padding: 12px 20px;
+            border-radius: 8px;
             cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
         }
+
+        button:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        #loginError {
+            color: #d00000;
+            min-height: 20px;
+            font-size: 14px;
+        }
+
+        /* ADMIN PANEL */
 
         #adminPanel {
             display: none;
+            max-width: 900px;
+            margin: auto;
         }
+
+        .admin-header {
+            background: #111;
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .admin-header h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .admin-header p {
+            margin: 0 0 15px;
+            color: #ccc;
+        }
+
+        .logout-btn {
+            background: white;
+            color: #111;
+        }
+
+        /* ORDERS */
 
         .order {
             background: white;
-            padding: 20px;
-            margin: 15px auto;
-            max-width: 600px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            padding: 23px;
+            margin: 18px 0;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
         }
 
         .order h3 {
             margin-top: 0;
+            font-size: 22px;
+        }
+
+        .order p {
+            line-height: 1.5;
+            word-break: break-word;
         }
 
         select {
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 10px;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            background: white;
+            font-size: 14px;
+            cursor: pointer;
         }
 
         .delete-btn {
-            background: red;
-            color: white;
-            border: none;
-            padding: 9px 15px;
-            border-radius: 5px;
-            cursor: pointer;
+            background: #d00000;
             margin-left: 10px;
         }
 
-        .logout-btn {
-            display: block;
-            margin: 20px auto;
+        .delete-btn:hover {
+            background: #a00000;
         }
 
-        #loginError {
-            color: red;
+        .loading,
+        .no-orders {
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            text-align: center;
         }
 
-        .total {
-            font-size: 18px;
-            font-weight: bold;
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            #loginBox {
+                margin: 60px auto;
+                padding: 25px 20px;
+            }
+
+            .admin-header h1 {
+                font-size: 23px;
+            }
+
+            .order {
+                padding: 18px;
+            }
+
+            .delete-btn {
+                display: block;
+                margin-left: 0;
+                margin-top: 12px;
+            }
+
+            select {
+                width: 100%;
+            }
         }
     </style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
+
 <div id="loginBox">
 
-    <h2>NEUROVA Admin Login</h2>
+    <h2>NEUROVA Admin</h2>
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Admin Email"
+        autocomplete="username"
+    >
 
     <input
         type="password"
         id="password"
-        placeholder="Enter Password"
+        placeholder="Password"
+        autocomplete="current-password"
     >
 
-    <button onclick="login()">
+    <button
+        id="loginButton"
+        onclick="login()"
+    >
         Login
     </button>
 
@@ -113,76 +222,34 @@
 </div>
 
 
+<!-- ADMIN PANEL -->
+
 <div id="adminPanel">
 
-    <h1>NEUROVA - Customer Orders</h1>
+    <div class="admin-header">
 
-    <button
-        class="logout-btn"
-        onclick="logout()"
-    >
-        Logout
-    </button>
+        <h1>NEUROVA Admin Panel</h1>
+
+        <p>Customer Orders</p>
+
+        <button
+            class="logout-btn"
+            onclick="logout()"
+        >
+            Logout
+        </button>
+
+    </div>
 
     <div id="orders">
-        Loading orders...
+
+        <div class="loading">
+            Loading orders...
+        </div>
+
     </div>
 
 </div>
-
-
-<script>
-
-const adminPassword = "neurova123";
-
-
-function login() {
-
-    const enteredPassword =
-        document.getElementById("password").value;
-
-
-    if (enteredPassword === adminPassword) {
-
-        document.getElementById(
-            "loginBox"
-        ).style.display = "none";
-
-
-        document.getElementById(
-            "adminPanel"
-        ).style.display = "block";
-
-    } else {
-
-        document.getElementById(
-            "loginError"
-        ).innerText = "Wrong password!";
-
-    }
-
-}
-
-
-function logout() {
-
-    document.getElementById(
-        "adminPanel"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "loginBox"
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "password"
-    ).value = "";
-
-}
-
-</script>
 
 
 <script type="module">
@@ -191,6 +258,12 @@ import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 import {
     getDatabase,
@@ -200,6 +273,8 @@ import {
     remove
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
+
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
@@ -227,183 +302,379 @@ const firebaseConfig = {
 };
 
 
-const app =
-    initializeApp(firebaseConfig);
+/* INITIALIZE FIREBASE */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const database = getDatabase(app);
 
 
-const database =
-    getDatabase(app);
+/* LOGIN */
+
+window.login = async function() {
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const error =
+        document.getElementById("loginError");
+
+    error.innerText = "";
 
 
-const ordersRef =
-    ref(database, "orders");
+    if (!email || !password) {
 
-
-onValue(ordersRef, (snapshot) => {
-
-    const ordersDiv =
-        document.getElementById("orders");
-
-
-    ordersDiv.innerHTML = "";
-
-
-    if (!snapshot.exists()) {
-
-        ordersDiv.innerHTML =
-            "<h2>No orders yet.</h2>";
+        error.innerText =
+            "Please enter email and password.";
 
         return;
     }
 
 
-    snapshot.forEach((childSnapshot) => {
+    try {
 
-        const order =
-            childSnapshot.val();
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
 
+    } catch (errorObject) {
 
-        const orderId =
-            childSnapshot.key;
+        error.innerText =
+            "Invalid email or password.";
 
-
-        const status =
-            order.status || "Pending";
-
-
-        const quantity =
-            order.quantity || 1;
-
-
-        const total =
-            order.total || 0;
-
-
-        ordersDiv.innerHTML += `
-
-            <div class="order">
-
-                <h3>${order.product}</h3>
-
-                <p>
-                    <b>Name:</b>
-                    ${order.name}
-                </p>
-
-                <p>
-                    <b>Phone:</b>
-                    ${order.phone}
-                </p>
-
-                <p>
-                    <b>Address:</b>
-                    ${order.address}
-                </p>
-
-                <p>
-                    <b>Order ID:</b>
-                    ${orderId}
-                </p>
-
-                <p>
-                    <b>Quantity:</b>
-                    ${quantity}
-                </p>
-
-                <p class="total">
-                    Total: ₹${Number(total).toLocaleString("en-IN")}
-                </p>
-
-                <p>
-                    <b>Order Status:</b>
-                </p>
-
-                <select
-                    onchange="changeStatus('${orderId}', this.value)"
-                >
-
-                    <option
-                        value="Pending"
-                        ${status === "Pending" ? "selected" : ""}
-                    >
-                        Pending
-                    </option>
-
-                    <option
-                        value="Confirmed"
-                        ${status === "Confirmed" ? "selected" : ""}
-                    >
-                        Confirmed
-                    </option>
-
-                    <option
-                        value="Shipped"
-                        ${status === "Shipped" ? "selected" : ""}
-                    >
-                        Shipped
-                    </option>
-
-                    <option
-                        value="Delivered"
-                        ${status === "Delivered" ? "selected" : ""}
-                    >
-                        Delivered
-                    </option>
-
-                </select>
-
-
-                <button
-                    class="delete-btn"
-                    onclick="deleteOrder('${orderId}')"
-                >
-                    Delete Order
-                </button>
-
-            </div>
-
-        `;
-
-    });
-
-});
-
-
-window.changeStatus =
-function(orderId, newStatus) {
-
-    update(
-        ref(
-            database,
-            "orders/" + orderId
-        ),
-        {
-            status: newStatus
-        }
-    );
+    }
 
 };
 
 
-window.deleteOrder =
-function(orderId) {
+/* LOGOUT */
+
+window.logout = async function() {
+
+    try {
+
+        await signOut(auth);
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+};
+
+
+/* AUTH STATE */
+
+onAuthStateChanged(auth, (user) => {
+
+    if (user) {
+
+        document.getElementById("loginBox")
+            .style.display = "none";
+
+        document.getElementById("adminPanel")
+            .style.display = "block";
+
+        loadOrders();
+
+    } else {
+
+        document.getElementById("loginBox")
+            .style.display = "block";
+
+        document.getElementById("adminPanel")
+            .style.display = "none";
+
+    }
+
+});
+
+
+/* LOAD ORDERS */
+
+function loadOrders() {
+
+    const ordersRef =
+        ref(database, "orders");
+
+
+    onValue(
+        ordersRef,
+        (snapshot) => {
+
+            const ordersDiv =
+                document.getElementById("orders");
+
+            ordersDiv.innerHTML = "";
+
+
+            if (!snapshot.exists()) {
+
+                ordersDiv.innerHTML = `
+                    <div class="no-orders">
+                        <h2>No orders yet.</h2>
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            snapshot.forEach((childSnapshot) => {
+
+                const order =
+                    childSnapshot.val();
+
+                const orderId =
+                    childSnapshot.key;
+
+                const status =
+                    order.status || "Pending";
+
+
+                const orderDiv =
+                    document.createElement("div");
+
+                orderDiv.className = "order";
+
+
+                orderDiv.innerHTML = `
+
+                    <h3>
+                        ${escapeHTML(
+                            order.product || "Product"
+                        )}
+                    </h3>
+
+                    <p>
+                        <b>Name:</b>
+                        ${escapeHTML(
+                            order.name || ""
+                        )}
+                    </p>
+
+                    <p>
+                        <b>Phone:</b>
+                        ${escapeHTML(
+                            order.phone || ""
+                        )}
+                    </p>
+
+                    <p>
+                        <b>Address:</b>
+                        ${escapeHTML(
+                            order.address || ""
+                        )}
+                    </p>
+
+                    <p>
+                        <b>Order ID:</b>
+                        ${escapeHTML(orderId)}
+                    </p>
+
+                    <p>
+                        <b>Order Status:</b>
+                    </p>
+
+                    <select
+                        class="status-select"
+                        data-order-id="${escapeHTML(orderId)}"
+                    >
+
+                        <option
+                            value="Pending"
+                            ${status === "Pending"
+                                ? "selected"
+                                : ""}
+                        >
+                            Pending
+                        </option>
+
+                        <option
+                            value="Confirmed"
+                            ${status === "Confirmed"
+                                ? "selected"
+                                : ""}
+                        >
+                            Confirmed
+                        </option>
+
+                        <option
+                            value="Shipped"
+                            ${status === "Shipped"
+                                ? "selected"
+                                : ""}
+                        >
+                            Shipped
+                        </option>
+
+                        <option
+                            value="Delivered"
+                            ${status === "Delivered"
+                                ? "selected"
+                                : ""}
+                        >
+                            Delivered
+                        </option>
+
+                    </select>
+
+                    <button
+                        class="delete-btn"
+                        data-delete-id="${escapeHTML(orderId)}"
+                    >
+                        Delete Order
+                    </button>
+
+                `;
+
+
+                ordersDiv.appendChild(orderDiv);
+
+            });
+
+
+            /* STATUS CHANGE */
+
+            document
+                .querySelectorAll(".status-select")
+                .forEach((select) => {
+
+                    select.addEventListener(
+                        "change",
+                        () => {
+
+                            changeStatus(
+                                select.dataset.orderId,
+                                select.value
+                            );
+
+                        }
+                    );
+
+                });
+
+
+            /* DELETE */
+
+            document
+                .querySelectorAll(".delete-btn")
+                .forEach((button) => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            deleteOrder(
+                                button.dataset.deleteId
+                            );
+
+                        }
+                    );
+
+                });
+
+        },
+        (error) => {
+
+            document.getElementById("orders").innerHTML = `
+                <div class="no-orders">
+                    <h2>Could not load orders.</h2>
+                    <p>Check Firebase Database Rules.</p>
+                </div>
+            `;
+
+        }
+    );
+
+}
+
+
+/* CHANGE STATUS */
+
+async function changeStatus(
+    orderId,
+    newStatus
+) {
+
+    try {
+
+        await update(
+            ref(
+                database,
+                "orders/" + orderId
+            ),
+            {
+                status: newStatus
+            }
+        );
+
+    } catch (error) {
+
+        alert(
+            "Could not update order status."
+        );
+
+    }
+
+}
+
+
+/* DELETE ORDER */
+
+async function deleteOrder(orderId) {
 
     if (
-        confirm(
+        !confirm(
             "Are you sure you want to delete this order?"
         )
     ) {
 
-        remove(
+        return;
+
+    }
+
+
+    try {
+
+        await remove(
             ref(
                 database,
                 "orders/" + orderId
             )
         );
 
+    } catch (error) {
+
+        alert(
+            "Could not delete order."
+        );
+
     }
 
-};
+}
+
+
+/* SECURITY: ESCAPE HTML */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
 
 </script>
 
